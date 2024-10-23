@@ -54,9 +54,10 @@ class Likes(Base):
     __tablename__ = 'likes'
     # Here we define columns for the table person
     # Notice that each column is also a normal Python instance attribute.
-    id_planetas = Column(Integer, ForeignKey('planetas.id'), primary_key=True)
-    id_personajes = Column(Integer, ForeignKey('personajes.id'), primary_key=True)
-    id_user = Column(Integer, ForeignKey('user.id'), primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    id_planetas = Column(Integer, ForeignKey('planetas.id'),  nullable=True)
+    id_personajes = Column(Integer, ForeignKey('personajes.id'),  nullable=True)
+    id_user = Column(Integer, ForeignKey('user.id'))
 
     user = relationship('User', back_populates='likes')
     planetas = relationship('Planetas', back_populates='likes')
