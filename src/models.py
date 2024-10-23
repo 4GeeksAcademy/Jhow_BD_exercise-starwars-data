@@ -20,7 +20,7 @@ class User(Base):
     password = Column(String(60) )
     email = Column(String(250), unique=True,  nullable=False)
 
-    user = relationship('Likes', back_populates='user')
+    likes = relationship('Likes', back_populates='user')
 
 #ok
 class Planetas(Base):
@@ -58,9 +58,10 @@ class Likes(Base):
     id_personajes = Column(Integer, ForeignKey('personajes.id'), primary_key=True)
     id_user = Column(Integer, ForeignKey('user.id'), primary_key=True)
 
-    likes = relationship('Planetas', back_populates='likes')
-    likes = relationship('Personajes', back_populates='likes')
-    likes = relationship('User', back_populates='likes')
+    user = relationship('User', back_populates='likes')
+    planetas = relationship('Planetas', back_populates='likes')
+    personajes = relationship('Personajes', back_populates='likes')
+   
     
 
     def to_dict(self):
