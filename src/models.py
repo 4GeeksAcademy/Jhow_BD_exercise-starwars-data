@@ -34,7 +34,7 @@ class Planetas(Base):
     poblacion = Column(String(80))
     descripcion = Column(String(220))
 #
-    planetas = relationship('Likes', back_populates='planetas')
+    
     
 #ok
 class Personajes(Base):
@@ -42,13 +42,13 @@ class Personajes(Base):
     # Here we define columns for the table person
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(250), unique=True, nullable=False)
+    name = Column(String(250), nullable=False)
     peso = Column(String(70) )
     color_ojos = Column(String(60) )
     sexo = Column(Enum('Hombre','Mujer','No definido'), nullable=False)
     color_pelo = Column(String(50) )
 
-    personajes = relationship('Likes', back_populates='personajes')
+    
 
 class Likes(Base):
     __tablename__ = 'likes'
@@ -60,8 +60,8 @@ class Likes(Base):
     id_user = Column(Integer, ForeignKey('user.id'))
 
     user = relationship('User', back_populates='likes')
-    planetas = relationship('Planetas', back_populates='likes')
-    personajes = relationship('Personajes', back_populates='likes')
+    planetas = relationship('Planetas')
+    personajes = relationship('Personajes')
    
     
 
